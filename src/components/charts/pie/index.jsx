@@ -28,35 +28,6 @@ const Pie = () => {
       ],
     },
   ]);
-  const addToMap = () => {
-    const newMap = new Map(myMap);
-    newMap.set("Google", options);
-    newMap.set("Bing", options);
-    newMap.set("Yahoo", options);
-    newMap.set("Yandex", options);
-    setMyMap(newMap);
-  };
-  useEffect(() => {
-    const newPieArr = handleOptions(options);
-    setOptions(newPieArr);
-    // 在组件挂载后执行一次
-    addToMap();
-  }, []);
-
-  // 原始数据
-  //   const [optionsOri, setOptions] = useState([
-  //     {
-  //       title: {
-  //         text: "art",
-  //         subtext: "228.8K",
-  //       },
-  //       data: [
-  //         { value: 73700, name: "印度" },
-  //         { value: 49800, name: "美国" },
-  //       ],
-  //     },
-  //   ]);
-
   // 处理图表配置
   const handleOptions = (options) => {
     return options.map((option, index) => {
@@ -82,6 +53,20 @@ const Pie = () => {
       };
     });
   };
+  const addToMap = (newOptions) => {
+    const newMap = new Map();
+    newMap.set("Google", newOptions);
+    newMap.set("Bing", newOptions);
+    newMap.set("Yahoo", newOptions);
+    newMap.set("Yandex", newOptions);
+    setMyMap(newMap);
+  };
+  useEffect(() => {
+    const newPieArr = handleOptions(options);
+    setOptions(newPieArr);
+    // 在组件挂载后执行一次
+    addToMap(newPieArr);
+  }, []);
 
   return (
     <div className={styles.pie}>
