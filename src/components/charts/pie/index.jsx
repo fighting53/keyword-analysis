@@ -62,7 +62,6 @@ const Pie = () => {
     return options.map((option, index) => {
       return {
         ...option,
-        id: index,
         title: { ...option.title, left: "center" },
         tooltip: { trigger: "item" },
         series: [
@@ -96,7 +95,7 @@ const Pie = () => {
               return (
                 <ReactECharts
                   option={option}
-                  key={index}
+                  key={`${key}-${index}`}
                   style={{ height: "500px", width: "100%" }}
                 />
               );
