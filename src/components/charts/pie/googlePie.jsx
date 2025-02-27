@@ -3,10 +3,8 @@ import ReactECharts from "echarts-for-react";
 import styles from "./styles.module.css";
 
 const Pie = () => {
-  // 图表配置数据源
-  // 使用 useState 初始化一个 Map 对象
-  const [myMap, setMyMap] = useState(new Map());
-  const [options, setOptions] = useState([
+  // 原始数据
+  const [optionsOri, setOptions] = useState([
     {
       title: {
         text: "art",
@@ -15,6 +13,15 @@ const Pie = () => {
       data: [
         { value: 73700, name: "印度" },
         { value: 49800, name: "美国" },
+        { value: 12800, name: "英国" },
+        { value: 10400, name: "中国" },
+        { value: 6000, name: "澳大利亚" },
+        { value: 5800, name: "加拿大" },
+        { value: 5000, name: "法国" },
+        { value: 3700, name: "德国" },
+        { value: 1500, name: "西班牙" },
+        { value: 467, name: "土耳其" },
+        { value: 441, name: "中国台湾" },
       ],
     },
     {
@@ -25,37 +32,23 @@ const Pie = () => {
       data: [
         { value: 73700, name: "印度" },
         { value: 49800, name: "美国" },
+        { value: 12800, name: "英国" },
+        { value: 10400, name: "中国" },
+        { value: 6000, name: "澳大利亚" },
+        { value: 5800, name: "加拿大" },
+        { value: 5000, name: "法国" },
+        { value: 3700, name: "德国" },
+        { value: 1500, name: "西班牙" },
+        { value: 467, name: "土耳其" },
+        { value: 441, name: "中国台湾" },
       ],
     },
   ]);
-  const addToMap = () => {
-    const newMap = new Map(myMap);
-    newMap.set("Google", options);
-    newMap.set("Bing", options);
-    newMap.set("Yahoo", options);
-    newMap.set("Yandex", options);
-    setMyMap(newMap);
-  };
-  useEffect(() => {
-    const newPieArr = handleOptions(options);
-    setOptions(newPieArr);
-    // 在组件挂载后执行一次
-    addToMap();
-  }, []);
 
-  // 原始数据
-  //   const [optionsOri, setOptions] = useState([
-  //     {
-  //       title: {
-  //         text: "art",
-  //         subtext: "228.8K",
-  //       },
-  //       data: [
-  //         { value: 73700, name: "印度" },
-  //         { value: 49800, name: "美国" },
-  //       ],
-  //     },
-  //   ]);
+  useEffect(() => {
+    const newPieArr = handleOptions(optionsOri);
+    setOptions(newPieArr);
+  }, []);
 
   // 处理图表配置
   const handleOptions = (options) => {
@@ -86,24 +79,15 @@ const Pie = () => {
 
   return (
     <div className={styles.pie}>
-      {Array.from(myMap.entries()).map(([key, value]) => (
-        <div className={styles.pie_item} key={key}>
-          <div>
-            <h1>{key}</h1>
-          </div>
-          <div className={styles.pie_item_chart}>
-            {value.map((option, index) => {
-              return (
-                <ReactECharts
-                  option={option}
-                  key={index}
-                  style={{ height: "500px", width: "100%" }}
-                />
-              );
-            })}
-          </div>
-        </div>
-      ))}
+      {optionsOri.map((option, index) => {
+        return (
+          <ReactECharts
+            option={option}
+            key={option.id}
+            style={{ height: "500px", width: "25%" }}
+          />
+        );
+      })}
     </div>
   );
 };

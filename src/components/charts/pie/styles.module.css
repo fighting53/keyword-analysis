@@ -1,6 +1,16 @@
 .pie {
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
+
   padding-top: 4.5rem;
+}
+.pie_item {
+  width: 25%;
+  padding-bottom: 2rem;
+}
+.pie_item_chart {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3rem;
 }
